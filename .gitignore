@@ -1,0 +1,4 @@
+HsReplayUploader/bin
+HsReplayUploader/obj
+.vs
+*.csproj.user
