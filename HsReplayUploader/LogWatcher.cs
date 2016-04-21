@@ -34,6 +34,13 @@ namespace HsReplayUploader
 			var powerLog = Path.Combine(Dir, "Logs/Power.log");
 			var t = new Thread(() =>
 			{
+				if(!File.Exists(powerLog))
+				{
+					MainActivity.Instance.Log("Could not find Power.log");
+					while(!File.Exists(powerLog))
+						Thread.Sleep(5000);
+				}
+				MainActivity.Instance.Log("Found Power.log");
 				var gameStart = LogHelper.FindEntryPoint(GameStart, powerLog, true);
 				var gameEnd = LogHelper.FindEntryPoint(GameEnd, powerLog, false);
 				var pos = gameStart > gameEnd ? gameStart : gameEnd;
@@ -51,6 +58,7 @@ namespace HsReplayUploader
 								Log.Debug("LogWatcher", line);
 								if(line.Contains(GameStart))
 								{
+									MainActivity.Instance.Log("New game!");
 									Log.Debug("LogWatcher", "NEW GAME");
 									CurrentGame.Clear();
 									CurrentGame.Add(line);
@@ -58,6 +66,7 @@ namespace HsReplayUploader
 								else if(line.Contains(GameEnd))
 								{
 									CurrentGame.Add(line);
+									MainActivity.Instance.Log($"Game complete! ({CurrentGame.Count} lines)");
 									Log.Debug("LogWatcher", "COMPLETE GAME");
 									LastGame.Clear();
 									LastGame.AddRange(CurrentGame);

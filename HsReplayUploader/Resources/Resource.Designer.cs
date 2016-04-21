@@ -57,6 +57,25 @@ namespace HsReplayUploader
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f050001
+			public const int TextViewLog = 2131034113;
+			
+			// aapt resource value: 0x7f050000
+			public const int scrollView1 = 2131034112;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			

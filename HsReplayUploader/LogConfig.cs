@@ -10,14 +10,13 @@ namespace HsReplayUploader
 			var logConfig = Path.Combine(Constants.Dir, "log.config");
 			if(!File.Exists(logConfig))
 			{
-				Log.Debug("LogConfig", "log.config not found");
+				MainActivity.Instance.Log("log.config not found");
 				using(var sr = new StreamWriter(logConfig))
 					sr.Write(Constants.LogConfigContent);
-				Log.Debug("LogConfig", "created log.config");
+				MainActivity.Instance.Log("Created log.config");
 			}
 			else
-				Log.Debug("LogConfig", "found log.config");
-
+				MainActivity.Instance.Log("Found log.config");
 		}
 	}
 }
